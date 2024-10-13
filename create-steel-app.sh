@@ -3,18 +3,33 @@
 # check rust installation - edited
 check_rust() {
     if ! rustup --version &> /dev/null; then
-        echo "Rust not found. To install, visit: https://www.rust-lang.org/tools/install"
-        exit 1
+        echo "Rust not found. Installing now..."
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        source $HOME/.cargo/env
+        rustup --version
+        echo "Rust has been installed."
+    else
+        echo "Rust is already installed."
     fi
 }
 
 # check forge installation, suggest installation if not found - edited
 check_foundry() {
     if ! foundryup --version &> /dev/null; then
-        echo "Foundry not found. To install, visit: https://book.getfoundry.sh/getting-started/installation"
-        exit 1
+        echo "Foundry not found. Installing now..."
+        curl -L https://foundry.paradigm.xyz | bash
+        source $HOME/.bashrc # hoặc $HOME/.zshrc tùy vào shell bạn sử dụng
+        foundryup
+        echo "Foundry has been installed."
+    else
+        echo "Foundry is already installed."
     fi
 }
+
+# Install rzup
+curl -L https://risczero.com/install | bash
+source ~/.bashrc
+rzup install
 
 # function to get risc0 version
 get_risc0_version() {
