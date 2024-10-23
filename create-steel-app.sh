@@ -18,7 +18,7 @@ check_foundry() {
     if ! foundryup --version &> /dev/null; then
         echo "Foundry not found. Installing now..."
         curl -L https://foundry.paradigm.xyz | bash
-        source /home/codespace/.bashrc # Dùng trên codespace (VPS thì edit lại)
+        source $HOME/.bashrc   # Dùng trên codespace source /home/codespace/.bashrc - VPS source $HOME/.bashrc
         foundryup
         echo "Foundry has been installed."
     else
